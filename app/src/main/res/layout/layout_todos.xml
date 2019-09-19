@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="70dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_todoName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/layout_priority"
+        app:layout_constraintStart_toEndOf="@id/layout_priority"
+        app:layout_constraintEnd_toStartOf="@id/layout_cat"
+        app:layout_constraintTop_toTopOf="@id/layout_priority"
+        app:layout_constraintVertical_bias="0.10"
+        android:layout_marginEnd="8dp"
+        tools:text="Wedding Ceremony at Afaha Uqua" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_todo_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="@id/tv_todoName"
+        app:layout_constraintEnd_toEndOf="@id/tv_todoName"
+        app:layout_constraintTop_toBottomOf="@id/tv_todoName"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="Going to work on a Monday Morning is " />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layout_priority"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/priority_drawable"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_priority"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="1" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layout_cat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintBottom_toBottomOf="@id/layout_priority"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_todoName"
+        app:layout_constraintTop_toTopOf="@id/layout_priority"
+        android:layout_marginRight="6dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimary"
+            tools:text="Category" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            tools:text="Boxing Match" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>
