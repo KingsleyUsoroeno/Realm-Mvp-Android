@@ -1,8 +1,6 @@
 package com.kingtech.tasky.views.todo.presenter
 
 import com.kingtech.tasky.views.todo.Todo
-import com.kingtech.tasky.views.todo.Validator
-import com.kingtech.tasky.views.ui.fragment.UserView
 import io.realm.Realm
 import io.realm.RealmResults
 
@@ -29,6 +27,11 @@ class RealmControllerImpl : RealmController {
 	
 	override fun deleteSingleTodo(id: Int) {
 		val todoToDelete = realm.where(Todo::class.java).equalTo("id", id).findFirst()
+		if (!realm.isInTransaction) {
+			realm.beginTransaction()
+			todoToDelete?.deleteFromRealm()
+			realm.commitTransaction()
+		}
 	}
 	
 	// Return all Todos

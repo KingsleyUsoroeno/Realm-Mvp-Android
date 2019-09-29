@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimary"
-            tools:text="Category" />
+            android:text="Category" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_category_name"
