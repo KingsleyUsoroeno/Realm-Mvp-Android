@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kingtech.tasky.R
-import com.kingtech.tasky.views.todo.Todo
+import com.kingtech.tasky.data.model.Todo
 import io.realm.RealmRecyclerViewAdapter
 import io.realm.RealmResults
 

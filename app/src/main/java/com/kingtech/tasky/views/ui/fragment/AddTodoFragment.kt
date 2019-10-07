@@ -2,8 +2,8 @@ package com.kingtech.tasky.views.ui.fragment
 
 
 import android.app.DatePickerDialog
-import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +11,16 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.kingtech.tasky.R
 import com.kingtech.tasky.common.Common
+import com.kingtech.tasky.data.model.Todo
 import com.kingtech.tasky.databinding.FragmentAddTodoBinding
-import com.kingtech.tasky.views.todo.Todo
+import com.kingtech.tasky.views.todo.presenter.TodoFragmentImpl
 import java.util.*
 
 
@@ -33,6 +35,7 @@ class AddTodoFragment : Fragment(), UserView, AdapterView.OnItemSelectedListener
 	private var selectedCategory = ""
 	private var dueDate = ""
 	private val TAG = "AddTodoFragment"
+	private var isReminderEnabled = false
 	
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -75,7 +78,8 @@ class AddTodoFragment : Fragment(), UserView, AdapterView.OnItemSelectedListener
 		if (priorityText.isNotEmpty()) {
 			priority = priorityText.toInt()
 		}
-		return Todo(id, name, desc, priority, selectedCategory, dueDate)
+		Log.i(TAG, "Reminder is $isReminderEnabled")
+		return Todo(id, name, desc, priority, selectedCategory, dueDate, isReminderEnabled)
 	}
 	
 	private fun showDatePicker() {
@@ -88,9 +92,6 @@ class AddTodoFragment : Fragment(), UserView, AdapterView.OnItemSelectedListener
 		datePicker.show()
 	}
 	
-	override fun showUserNotSavedMessage() {
-		showMsg("Error saving your Todo please try again")
-	}
 	
 	override fun showInputIsRequired() {
 		showMsg("Somethings Missing")
@@ -100,26 +101,24 @@ class AddTodoFragment : Fragment(), UserView, AdapterView.OnItemSelectedListener
 		return context!!.resources.getStringArray(R.array.all_task).asList()
 	}
 	
-	private fun showMsg(msg: String) {
+	override fun showMsg(msg: String) {
 		Toast.makeText(context!!, msg, Toast.LENGTH_LONG).show()
-	}
-	
-	override fun showUserSavedMsg() {
-		showMsg("Todo Saved Successfully")
 	}
 	
 	override fun navigateTo(destination: Int) {
 		todoFragmentBinding.root.findNavController().navigate(destination)
 	}
 	
-	override fun showEnabledReminder() {
+	override fun showEnabledReminder(isEnabled: Boolean, color: Int) {
 		val wrappedDrawable = DrawableCompat.wrap(todoFragmentBinding.imgNotification.drawable)
-		DrawableCompat.setTint(wrappedDrawable, Color.BLUE)
+		DrawableCompat.setTint(wrappedDrawable, ContextCompat.getColor(context!!, color))
+		isReminderEnabled = isEnabled
 	}
 	
-	override fun showDisabledReminder() {
+	override fun showDisabledReminder(isEnabled: Boolean, color: Int) {
 		val wrappedDrawable = DrawableCompat.wrap(todoFragmentBinding.imgNotification.drawable)
-		DrawableCompat.setTint(wrappedDrawable, Color.BLACK)
+		DrawableCompat.setTint(wrappedDrawable, ContextCompat.getColor(context!!, color))
+		isReminderEnabled = isEnabled
 	}
 	
 	override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -132,6 +131,6 @@ class AddTodoFragment : Fragment(), UserView, AdapterView.OnItemSelectedListener
 	}
 	
 	override fun onDateSet(datePicker: DatePicker?, year: Int, month: Int, day: Int) {
-		dueDate = Common.formateDialogDate(year, month, day)
+		dueDate = Common.formatDialogDate(year, month, day)
 	}
 }

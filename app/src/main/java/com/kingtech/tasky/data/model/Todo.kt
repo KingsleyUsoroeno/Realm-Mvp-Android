@@ -1,8 +1,7 @@
-package com.kingtech.tasky.views.todo
+package com.kingtech.tasky.data.model
 
 import android.os.Parcelable
 import io.realm.RealmObject
-import io.realm.annotations.Ignore
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.Required
 import kotlinx.android.parcel.Parcelize
@@ -15,7 +14,7 @@ open class Todo(
 	var priority: Int,
 	var cat: String,
 	var dueDate: String,
-	@Ignore var reminder: Boolean = false // later feature
+	var reminder: Boolean = false // later feature
 ) : RealmObject(), Parcelable {
-	constructor() : this(0, "", "", 0, "", "")
+	constructor() : this(0, "", "", 0, "", "", false)
 }

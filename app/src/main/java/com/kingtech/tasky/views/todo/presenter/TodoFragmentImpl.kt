@@ -1,8 +1,9 @@
-package com.kingtech.tasky.views.ui.fragment
+package com.kingtech.tasky.views.todo.presenter
 
 import com.kingtech.tasky.R
+import com.kingtech.tasky.data.RealmControllerImpl
 import com.kingtech.tasky.views.todo.Validator
-import com.kingtech.tasky.views.todo.presenter.RealmControllerImpl
+import com.kingtech.tasky.views.ui.fragment.UserView
 
 class TodoFragmentImpl(private val userView: UserView, private var isEnabled: Boolean) {
 	
@@ -15,19 +16,22 @@ class TodoFragmentImpl(private val userView: UserView, private var isEnabled: Bo
 			userView.showInputIsRequired()
 		} else {
 			realmCtl.saveTodo(todo)
-			userView.showUserSavedMsg()
+			userView.showMsg("Task has been saved successfully")
 			userView.navigateTo(R.id.action_addTodoFragment_to_todoFragment)
 		}
 	}
 	
-	fun setToggle(): Boolean {
+	fun setToggle() {
 		if (isEnabled) {
 			isEnabled = false
-			userView.showEnabledReminder()
-		} else {
-			isEnabled = true
-			userView.showDisabledReminder()
+			userView.showDisabledReminder(isEnabled, R.color.primary_text)
+			return
 		}
-		return isEnabled
+		
+		if (!isEnabled) {
+			isEnabled = true
+			userView.showEnabledReminder(isEnabled, R.color.colorPrimary)
+			return
+		}
 	}
 }

@@ -1,6 +1,6 @@
-package com.kingtech.tasky.views.todo.presenter
+package com.kingtech.tasky.data
 
-import com.kingtech.tasky.views.todo.Todo
+import com.kingtech.tasky.data.model.Todo
 import io.realm.RealmResults
 
 

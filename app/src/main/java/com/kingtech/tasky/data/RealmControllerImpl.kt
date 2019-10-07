@@ -1,6 +1,6 @@
-package com.kingtech.tasky.views.todo.presenter
+package com.kingtech.tasky.data
 
-import com.kingtech.tasky.views.todo.Todo
+import com.kingtech.tasky.data.model.Todo
 import io.realm.Realm
 import io.realm.RealmResults
 
@@ -43,6 +43,4 @@ class RealmControllerImpl : RealmController {
 	override fun getSingleTodo(id: Int): Todo? {
 		return realm.where(Todo::class.java).equalTo("id", id).findFirst()
 	}
-	
-	
 }

@@ -1,22 +1,20 @@
 package com.kingtech.tasky.views.ui.fragment
 
-import com.kingtech.tasky.views.todo.Todo
+import com.kingtech.tasky.data.model.Todo
 
 interface UserView {
 	
 	fun getTodo(): Todo
 	
-	fun showUserNotSavedMessage()
-	
 	fun showInputIsRequired()
 	
 	fun getStringResourceArray(): List<String>
 	
-	fun showUserSavedMsg()
+	fun showMsg(msg: String)
 	
 	fun navigateTo(destination: Int)
 	
-	fun showEnabledReminder()
+	fun showEnabledReminder(isEnabled: Boolean, color: Int)
 	
-	fun showDisabledReminder()
+	fun showDisabledReminder(isEnabled: Boolean, color: Int)
 }

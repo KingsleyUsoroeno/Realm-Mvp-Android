@@ -10,8 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.kingtech.tasky.R
+import com.kingtech.tasky.data.model.Todo
 import com.kingtech.tasky.databinding.FragmentTodoBinding
-import com.kingtech.tasky.views.todo.Todo
+import com.kingtech.tasky.views.todo.presenter.TodoPresenter
 import com.kingtech.tasky.views.ui.adapter.TodoAdapter
 import io.realm.RealmResults
 
@@ -48,10 +49,8 @@ class TodoFragment : Fragment(), TodoView, TodoAdapter.OnTodoClickListener {
 		dataBinding.fab.setOnClickListener {
 			addTask()
 		}
-		allTodo?.let {
-			setUpRecyclerView(it)
-			
-		}
+		
+		setUpRecyclerView(allTodo)
 		return dataBinding.root
 	}
 	
@@ -59,17 +58,17 @@ class TodoFragment : Fragment(), TodoView, TodoAdapter.OnTodoClickListener {
 		todoPresenter.navigate(R.id.action_todoFragment_to_addTodoFragment, null)
 	}
 	
-	private fun setUpRecyclerView(todo: RealmResults<Todo>) {
-		if (todo.isNotEmpty()) {
+	private fun setUpRecyclerView(todo: RealmResults<Todo>?) {
+		if (todo == null) {
+			dataBinding.tvNoTodo.visibility = View.VISIBLE
+			dataBinding.taskList.visibility = View.GONE
+		} else {
 			val todoAdapter = TodoAdapter(todo)
 			dataBinding.taskList.setHasFixedSize(true)
 			dataBinding.taskList.adapter = todoAdapter
 			todoAdapter.setOnItemClickListener(this)
 			dataBinding.taskList.addItemDecoration(DividerItemDecoration(this.context, 1))
 			dataBinding.tvNoTodo.visibility = View.GONE
-		} else {
-			dataBinding.tvNoTodo.visibility = View.VISIBLE
-			dataBinding.taskList.visibility = View.GONE
 		}
 	}
 	
@@ -77,7 +76,7 @@ class TodoFragment : Fragment(), TodoView, TodoAdapter.OnTodoClickListener {
 		dataBinding.root.findNavController().navigate(destination, arg)
 	}
 	
-	override fun setTodo(todo: RealmResults<Todo>) {
+	override fun setTodo(todo: RealmResults<Todo>?) {
 		allTodo = todo
 	}
 	

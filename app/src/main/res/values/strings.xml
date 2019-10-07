@@ -20,6 +20,7 @@
     <string name="test">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, </string>
     <string name="task_due_date">Task due date</string>
     <string name="reminder_alarm_is_off">Reminder alarm is not set</string>
+    <string name="reminder_alarm_is_on">Reminder alarm has been set</string>
     <string name="delete_menu_task">delete_menu_task</string>
     <string name="edit_menu_task">Edit menu task</string>
     <string name="no_time">Due date not set</string>
